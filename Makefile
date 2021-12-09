@@ -1,6 +1,6 @@
 EXECUTABLE := ims-project
 BUILD_DIR := bin
-PACK := 02_xtulus00_xhosti02
+PACK := xzatko02_xrakus04
 DOC_DIR := doc
 SRC_DIR := src
 DOC := documentation.pdf
