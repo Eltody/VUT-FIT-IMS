@@ -73,8 +73,6 @@ public:
 
         newYearPetrol:
         
-        
-
         for (unsigned long i = 0; i < petrol_cars; i++) {
             if (too_old_car(TOO_OLD_PETROL_CAR)) {
                 petrol_cars--;
@@ -82,19 +80,13 @@ public:
                 for (int j = 0; j < 2; j++) {
                     if (choose_new_engine(petrol_after_petrol)) {
                         petrol_cars++;
-                        CO2 += CO2_NEW_PETROL;
                     } else {
                         electric_cars++;
-                        CO2 += CO2_NEW_ELECTRIC;
                     }
                 }
             }
         }
 
-        for (unsigned long i = 0; i < electric_cars; i++) {
-            CO2 += CO2_PETROL_FUEL;
-            CO2 += CO2_PETROL_DRIVE;
-        }
         Passivate();
         
         goto newYearPetrol;
@@ -111,7 +103,6 @@ public:
 
         newYearElectric:
         
-
         for (unsigned long i = 0; i < electric_cars; i++) {
             if (too_old_car(TOO_OLD_ELECTRIC_CAR)) {
                 electric_cars--;
@@ -119,21 +110,14 @@ public:
                 for (int j = 0; j < 2; j++) {
                     if (choose_new_engine(petrol_after_electric)) {
                         petrol_cars++;
-                        CO2 += CO2_NEW_PETROL;
                     } else {
                         electric_cars++;
-                        CO2 += CO2_NEW_ELECTRIC;
                     }
                 }
             } else {
                 if (this->too_old_battery()) {
-                    CO2 += CO2_NEW_BATTERY;
                 }
             }
-        }
-
-        for (unsigned long i = 0; i < electric_cars; i++) {
-            CO2 += CO2_ELECTRIC_ENERGY;
         }
 
         Passivate();
@@ -174,31 +158,13 @@ public:
         cout << "---                  Year " << yearCnt++ << "                            ---" << endl;
         cout << "- Number of petrol cars:      " << petrol_cars << endl;
         cout << "- Number of electric cars:    " << electric_cars << endl;
-
-        cout << "ročné emisie:   " << (CO2 - yearCO2) / 1000 << " t" << endl;
-        cout << "celkové emisie: " << CO2 / 1000 << " t" << endl;
         
-
-        if (CO2 -yearCO2 != 0)
-            (*CO2Stat)((CO2 - yearCO2)/1000);
-        yearCO2 = CO2;
         Activate(Time + NEXT_YEAR);
-        
-        
-    }
-
-    ~YearTimer() {
-        CO2Stat->Output();
     }
 
 private:
     const double NEXT_YEAR = 1.0;
 };
-
-
-
-
-
 
 
 int main(int argc, char** argv){
