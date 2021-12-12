@@ -12,7 +12,7 @@ unsigned long electric_cars = DEFAULT_ELECTRIC_CARS_NUM;
 unsigned long ev_consumption = ONE_YEAR_EV_CONSUMPTION;
 long double year_ev_consumption = 0;
 
-bool too_old_car(double type) {
+bool oldCar(double type) {
     if (Random() > type) {
         return true;
     } else {
@@ -29,14 +29,14 @@ public:
         newYearElectric:
 	year_ev_consumption = electric_cars * ev_consumption;     
         for (unsigned long i = 0; i < electric_cars; i++) {
-            if (too_old_car(TOO_OLD_ELECTRIC_CAR)) {	// stare auto = kupa noveho
+            if (oldCar(TOO_OLD_ELECTRIC_CAR)) {	// stare auto = kupa noveho
                 electric_cars--;
  
                 for (int j = 0; j < 2; j++) {
                         electric_cars++;
                 }
             } else {
-                if (this->too_old_battery()) {
+                if (this->oldBattery()) {
 			year_ev_consumption += 5130; 	// vymena baterii v aute - 1kwh = 57kwh of energy, EV = 90kwh batteries, 90 * 57 = 5130kwh for manufacturing of batteries
 		}
             }
@@ -49,7 +49,7 @@ public:
     }
 
 
-    bool too_old_battery() {
+    bool oldBattery() {
     if (Random() < TOO_OLD_BATTERY) {	// SIMLIB funkcia Random = normalne rozdelenie, hodnoty <0,1)
         return true;
     } else {
@@ -75,11 +75,11 @@ public:
         cout << "---                  Rok " << yearCnt++ << "                            ---" << endl;
         cout << "- Pocet elektro-aut:        " << electric_cars << endl;
         
-        Activate(Time + NEXT_YEAR);
+        Activate(Time + nextYear);
     }
 
 private:
-    const double NEXT_YEAR = 1.0;
+    const double nextYear = 1.0;
 };
 
 
