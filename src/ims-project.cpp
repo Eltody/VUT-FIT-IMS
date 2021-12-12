@@ -10,7 +10,7 @@ int yearCnt = 2018;
 
 unsigned long electric_cars = DEFAULT_ELECTRIC_CARS_NUM;
 unsigned long ev_consumption = ONE_YEAR_EV_CONSUMPTION;
-unsigned long year_ev_consumption = 0;
+long double year_ev_consumption = 0;
 
 bool too_old_car(double type) {
     if (Random() > type) {
@@ -41,7 +41,8 @@ public:
 		}
             }
         }
-	cout << "- year EV consumption:    " << year_ev_consumption << " kWh" << endl;
+	year_ev_consumption = year_ev_consumption / 1000000000;		// prevod na billion kwh
+	cout << "- Rocna spotreba energie:    " << year_ev_consumption << " billion kWh" << endl;
         Passivate();
         
         goto newYearElectric;
@@ -70,9 +71,9 @@ public:
     void Behavior() {
         e_car->Activate();
 
-        cout << "-------------------------------------------------------------" << endl;
-        cout << "---                  Year " << yearCnt++ << "                            ---" << endl;
-        cout << "- Number of electric cars:    " << electric_cars << endl;
+        cout << "------------------------------------------------------------" << endl;
+        cout << "---                  Rok " << yearCnt++ << "                            ---" << endl;
+        cout << "- Pocet elektro-aut:        " << electric_cars << endl;
         
         Activate(Time + NEXT_YEAR);
     }
