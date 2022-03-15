@@ -7,7 +7,3 @@
 
 ## Zadanie projektu
 * **Zadanie projektu: http://perchta.fit.vutbr.cz:8000/vyuka-ims/53**
-
-## Členovia tímu:
-* **Tomáš Zaťko (xzatko02)**
-* **Martin Rakús (xrakus04)**
